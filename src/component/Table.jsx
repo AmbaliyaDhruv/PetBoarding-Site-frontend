@@ -7,6 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import {useSelector,useDispatch} from 'react-redux'
+import { getData } from '../action/getData';
+import SelectLabels from './Selecter';
 import axios from 'axios';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -30,18 +33,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 export default function Tables() {
-    const [row,setrow]=useState([]);
-
-    const getData=()=>{
+    
+    const row = useSelector(state=>state.dataForTable)
+   
+    const dispatch = useDispatch();
+    const getdata=()=>{
        axios.get("http://localhost:8080/create").then(res=>{
-           setrow(res.data)
+          
+           dispatch(getData(res.data))
        }).catch(err=>{
            console.log(err)
        } )
     }
 
     useEffect(()=>{
-        getData();
+        getdata();
+      
     },[])
 
     const heandlemove=(id)=>{
@@ -50,7 +57,9 @@ export default function Tables() {
 
 
   return (
+    
     <TableContainer style={{width:"70%",margin:"auto",marginTop:"80px"}} component={Paper}>
+       <SelectLabels/>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -66,7 +75,7 @@ export default function Tables() {
         </TableHead>
         <TableBody>
           {row.map((e,i)=>{
-              return  <StyledTableRow key={e._id} onClick={()=>{heandlemove(e._id)}}>
+              return  <StyledTableRow key={e._id} sx={{cursor:"pointer"}} onClick={()=>{heandlemove(e._id)}}>
               <StyledTableCell align="left">{i+1}</StyledTableCell>
                   <StyledTableCell component="th" scope="row">
                     {e.name}
