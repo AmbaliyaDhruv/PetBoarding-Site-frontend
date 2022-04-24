@@ -8,6 +8,7 @@ import SignUp from './component/SignUp'
 import Login from './component/Login'
 import Navbar from './component/Navbar'
 import Edit from './component/Edit'
+import Pats from './component/PatComponent/Pats'
 function App() {
   
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/listing/:id" element={<Detaile/>}/>
         <Route path="/listing/Edit/:id" element={<Edit/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/mypats" element={<Pats/>}/>
         <Route path="/signup" element={<SignUp/>}/>
      </Routes>
     </div>

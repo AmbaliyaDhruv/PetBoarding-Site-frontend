@@ -144,7 +144,9 @@ const Navbar = () => {
                 <MenuItem onClick={handleCloseUserMenu}>
                 <Typography onClick={handlelogout}>Logout</Typography>
                 </MenuItem>
-            
+                 <MenuItem onClick={handleCloseUserMenu}>
+                 <Link style={{textDecoration:"none",color:"black"}} to={"/mypats"}>Profile</Link>
+                </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
