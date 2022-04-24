@@ -7,21 +7,22 @@ import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {useSelector,useDispatch} from 'react-redux'
-import {addData} from "../action/addData"
-import { Link } from 'react-router-dom';
+import {useSelector,useDispatch} from 'react-redux';
+import {adminLogin} from "../action/checkAdmin";
+import { Link} from 'react-router-dom';
 import FormHelperText from '@mui/material/FormHelperText';
 
 function Loginform() {
     // const check = useSelector(state=>state.createCenter)
-    // const dispatch = useDispatch()
-
+    const dispatch = useDispatch()
+    
     const [data,setdata]=useState({
          email:"",
         password:"",
 
     })
-
+  
+    const [status,setstatus]=useState(false)
     const hendleChangesforData=(e)=>{
         const {id,value}=e.target
         setdata({
@@ -35,17 +36,30 @@ function Loginform() {
 
     const hendleSubmit=(e)=>{
         e.preventDefault()
-    console.log(data)
+       axios.post("http://localhost:8080/authentication/signin",data).then(res=>{
+           dispatch(adminLogin(res.data.user))
+           alert("Login Successfully")
+           setdata({
+               email:"",
+               password:"",
+           })
+            
+         setstatus(true)
+       }).catch(err=>{
+           alert("Login Failed please try with another email id")})
    
     }
 
     
   return (
       <>
+      
        <Typography gutterBottom variant="h3" align="center">
        Welcom to Patcare
        </Typography>
+        
        <Card style={{border:"2px solid black" ,width:"60%",margin:"auto"}}>
+       {status?<Link to="/">Desbord</Link>:null}
            <CardContent >
          <form onSubmit={hendleSubmit}>
          

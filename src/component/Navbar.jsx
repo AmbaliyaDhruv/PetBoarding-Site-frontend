@@ -13,6 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import PetsIcon from '@mui/icons-material/Pets';
 import { Link } from 'react-router-dom';
+import { useSelector,useDispatch } from 'react-redux';
+import {adminLogin} from "../action/checkAdmin";
 const pages = ["Home", "Create", "About"];
 const settings = ['Login', 'Account', 'Dashboard', 'Logout'];
 
@@ -34,7 +36,16 @@ const Navbar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+ 
 
+  const {name}=useSelector(state=>state.adminData)
+  const dispatch = useDispatch()
+  const handlelogout=()=>{
+    let dub={
+      email:"nan"
+    }
+     dispatch(adminLogin(dub))
+  }
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -79,7 +90,7 @@ const Navbar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center"> <Link style={{textDecoration:"none",color:"black"}} to={page==="Home"?"/":`/listing/${page.toLowerCase()}`}>{page}</Link> </Typography>
+                  <Typography textAlign="center"> <Link style={{textDecoration:"none",color:"black"}} to={page==="Home"?"/":`/listing/${page.toLowerCase()}`}>{page}</Link></Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -107,7 +118,7 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <Avatar sx={{ bgcolor:"black"}}>{name[0]?name[0].toUpperCase():null}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -126,11 +137,14 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Link style={{textDecoration:"none",color:"black"}} to={setting==="Login"?"/login":"/"}>{setting}</Link> 
+              
+                <MenuItem onClick={handleCloseUserMenu}>
+                <Link style={{textDecoration:"none",color:"black"}} to={"/login"}>Login</Link>
                 </MenuItem>
-              ))}
+                <MenuItem onClick={handleCloseUserMenu}>
+                <Typography onClick={handlelogout}>Logout</Typography>
+                </MenuItem>
+            
             </Menu>
           </Box>
         </Toolbar>

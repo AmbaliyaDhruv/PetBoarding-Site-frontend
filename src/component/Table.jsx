@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useSelector,useDispatch} from 'react-redux'
 import { getData } from '../action/getData';
+import { Link } from 'react-router-dom';
 import SelectLabels from './Selecter';
 import axios from 'axios';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -35,7 +36,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function Tables() {
     
     const row = useSelector(state=>state.dataForTable)
-   
+    const {AdminSatatus}=useSelector(state=>state.adminData)
+
     const dispatch = useDispatch();
     const getdata=()=>{
        axios.get("http://localhost:8080/create").then(res=>{
@@ -51,9 +53,13 @@ export default function Tables() {
       
     },[])
 
-    const heandlemove=(id)=>{
-        window.location.href=`/listing/${id}`
-    }
+   const deleteData=(id)=>{
+        axios.delete(`http://localhost:8080/create/${id}`).then(res=>{
+            getdata();
+        }).catch(err=>{
+            console.log(err)
+        })
+   }
 
 
   return (
@@ -71,11 +77,15 @@ export default function Tables() {
             <StyledTableCell align="center">Cost per day</StyledTableCell>
             <StyledTableCell align="center">Verified</StyledTableCell>
             <StyledTableCell align="center">Rating</StyledTableCell>
+            <StyledTableCell align="center">More</StyledTableCell>
+            {AdminSatatus?<StyledTableCell align="center">Delete</StyledTableCell>:null}
+            {AdminSatatus?<StyledTableCell align="center">Edit</StyledTableCell>:null}
+           
           </TableRow>
         </TableHead>
         <TableBody>
           {row.map((e,i)=>{
-              return  <StyledTableRow key={e._id} sx={{cursor:"pointer"}} onClick={()=>{heandlemove(e._id)}}>
+              return  <StyledTableRow key={e._id} sx={{cursor:"pointer"}}>
               <StyledTableCell align="left">{i+1}</StyledTableCell>
                   <StyledTableCell component="th" scope="row">
                     {e.name}
@@ -86,6 +96,10 @@ export default function Tables() {
                   <StyledTableCell align="center">{e.costPerDay}</StyledTableCell>
                   <StyledTableCell align="center">Yes</StyledTableCell>
                   <StyledTableCell align="center">5</StyledTableCell>
+                  <StyledTableCell align="center"><Link to={`/listing/${e._id}`}>More</Link></StyledTableCell>
+                  {AdminSatatus?<StyledTableCell align="center" onClick={()=>{deleteData(e._id)}}>Delete</StyledTableCell>:null}
+                  {AdminSatatus?<StyledTableCell align="center"><Link to={`/listing/Edit/${e._id}`}>Edit</Link></StyledTableCell>:null}
+                  
                 </StyledTableRow>
           })}
          

@@ -37,8 +37,24 @@ function SignUpform() {
 
     const hendleSubmit=(e)=>{
         e.preventDefault()
-    console.log(data)
-   
+    axios.post("http://localhost:8080/authentication/signup",data).then(res=>{
+        alert("SignUp Successfully")
+        setdata({
+            username:"",
+            firstname:"",
+            email:"",
+            number:"",
+            password:"",
+        })
+    }).catch(err=>{
+        alert("SignUp Failed please try with another email id")})
+        setdata({
+            username:"",
+            firstname:"",
+            email:"",
+            number:"",
+            password:"",
+        })
     }
 
     
