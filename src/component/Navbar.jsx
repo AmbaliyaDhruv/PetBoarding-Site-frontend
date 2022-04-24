@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import PetsIcon from '@mui/icons-material/Pets';
 import { Link } from 'react-router-dom';
 const pages = ["Home", "Create", "About"];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Login', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -128,7 +128,7 @@ const Navbar = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <Link style={{textDecoration:"none",color:"black"}} to={setting==="Login"?"/login":"/"}>{setting}</Link> 
                 </MenuItem>
               ))}
             </Menu>
