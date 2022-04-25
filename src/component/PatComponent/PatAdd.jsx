@@ -35,7 +35,7 @@ const Id=useSelector(state=>state.adminData.Id)
     const hendleSubmit=(e)=>{
         e.preventDefault()
      dispatch(patData(check))
-       axios.post("http://localhost:8080/pats",check).then(res=>{
+       axios.post("https://patboarding.herokuapp.com/pats",check).then(res=>{
            console.log(res.data)
            alert("Data added successfully")
            dispatch(patData({
