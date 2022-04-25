@@ -2,7 +2,7 @@
 import createCenter from "./createCenter";
 import dataForTable from "./dataForTable";
 import adminData from "./adminData";
-import dataForPat from "./dataForPat";
+import dataForPat from "./dataforPat";
 import createPatData from "./createPatData";
 import { combineReducers } from "redux";
 
