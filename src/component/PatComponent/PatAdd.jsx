@@ -19,21 +19,11 @@ const Id=useSelector(state=>state.adminData.Id)
 
     const dispatch = useDispatch()
 
-    // const [data,setdata]=useState({
-    //     name:"",
-    //     city:"",
-    //     address:"",
-    //     capacity:"",
-    //     costPerDay:"",
-
-    // })
+  
 
     const hendleChangesforData=(e)=>{
         const {id,value}=e.target
-        // setdata({
-        //     ...data,
-        //     [id]:value
-        // })
+    
         dispatch(patData({
             ...check,
             userId:Id,

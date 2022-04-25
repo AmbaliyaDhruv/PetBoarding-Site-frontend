@@ -43,14 +43,14 @@ export default function Tables() {
     console.log(page)
     const dispatch = useDispatch();
     const getdata=()=>{
-       axios.get(`http://localhost:8080/create?page=${page}`).then(res=>{
+       axios.get(`https://patboarding.herokuapp.com/create?page=${page}`).then(res=>{
           
            dispatch(getData(res.data))
            
        }).catch(err=>{
            console.log(err)
        } )
-       axios.get("http://localhost:8080/create/count").then(res=>{
+       axios.get("https://patboarding.herokuapp.com/create/count").then(res=>{
             setcount(Math.ceil((res.data.count)/4))
        })
     }
@@ -61,7 +61,7 @@ export default function Tables() {
     },[page])
  console.log(count)
    const deleteData=(id)=>{
-        axios.delete(`http://localhost:8080/create/${id}`).then(res=>{
+        axios.delete(`https://patboarding.herokuapp.com/create/${id}`).then(res=>{
             getdata();
         }).catch(err=>{
             console.log(err)

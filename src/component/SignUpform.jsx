@@ -37,7 +37,7 @@ function SignUpform() {
 
     const hendleSubmit=(e)=>{
         e.preventDefault()
-    axios.post("http://localhost:8080/authentication/signup",data).then(res=>{
+    axios.post("https://patboarding.herokuapp.com/authentication/signup",data).then(res=>{
         alert("SignUp Successfully")
         setdata({
             username:"",

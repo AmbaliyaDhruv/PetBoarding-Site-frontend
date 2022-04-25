@@ -74,7 +74,7 @@ export default function DetaileCard({id}) {
     };
  
     useEffect(()=>{
-        axios.get(`http://localhost:8080/create/${id}`).then(res=>{
+        axios.get(`https://patboarding.herokuapp.com/create/${id}`).then(res=>{
             setData(res.data)
         })
     },[])

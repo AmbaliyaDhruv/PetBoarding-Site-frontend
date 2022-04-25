@@ -17,14 +17,14 @@ export default function SelectLabels() {
   const handleChange = (event) => {
     setAge(event.target.value);
     if(event.target.value===''){
-        axios.get("http://localhost:8080/create").then(res=>{
+        axios.get("https://patboarding.herokuapp.com/create").then(res=>{
              dispatch(getData(res.data))
          }).catch(err=>{
              console.log(err)
          } )
     }
     else{
-    axios.get(`http://localhost:8080/create/?city=${event.target.value}`).then(res=>{
+    axios.get(`https://patboarding.herokuapp.com/create/?city=${event.target.value}`).then(res=>{
         
         dispatch(getData(res.data))
     }).catch(err=>{
@@ -34,7 +34,7 @@ export default function SelectLabels() {
   };
 
   const getdata=()=>{
-    axios.get("http://localhost:8080/create").then(res=>{
+    axios.get("https://patboarding.herokuapp.com/create").then(res=>{
        setdata(res.data)
         
     }).catch(err=>{
@@ -47,14 +47,14 @@ export default function SelectLabels() {
      console.log(event.target.value)
     setNum(event.target.value);
     if(event.target.value===''){
-        axios.get(`http://localhost:8080/create/?city=${age}`).then(res=>{
+        axios.get(`https://patboarding.herokuapp.com/create/?city=${age}`).then(res=>{
              dispatch(getData(res.data))
          }).catch(err=>{
              console.log(err)
          } )
     }
     else{
-    axios.get(`http://localhost:8080/create/?city=${age}&costPerDay=${event.target.value}`).then(res=>{
+    axios.get(`https://patboarding.herokuapp.com/create/?city=${age}&costPerDay=${event.target.value}`).then(res=>{
         
         dispatch(getData(res.data))
     }).catch(err=>{

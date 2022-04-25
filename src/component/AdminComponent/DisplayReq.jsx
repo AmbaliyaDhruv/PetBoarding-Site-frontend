@@ -16,7 +16,7 @@ export default function DisplayReq({ data }) {
     };
 
     const acceptreq=(id)=>{
-       axios.patch(`http://localhost:8080/booking/${id}`,{status:"approved"}).then(res=>{
+       axios.patch(`https://patboarding.herokuapp.com/booking/${id}`,{status:"approved"}).then(res=>{
             alert("Request Accepted")
             return(
                 <div>

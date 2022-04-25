@@ -12,7 +12,7 @@ export default function Request() {
   const [data,setData]=useState([])
   
    useEffect(()=>{
-       axios.get("http://localhost:8080/booking/?status=pending").then(res=>{
+       axios.get("https://patboarding.herokuapp.com/booking/?status=pending").then(res=>{
            setData(res.data)
        }).catch(err=>{
            console.log(err)

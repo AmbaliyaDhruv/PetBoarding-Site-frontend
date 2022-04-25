@@ -40,7 +40,7 @@ export default function PatTable() {
 
     const dispatch = useDispatch();
     const getdata=()=>{
-       axios.get(`http://localhost:8080/pats?userId=${Id}`).then(res=>{
+       axios.get(`https://patboarding.herokuapp.com/pats?userId=${Id}`).then(res=>{
           
            dispatch(patAdd(res.data))
        }).catch(err=>{
@@ -54,7 +54,7 @@ export default function PatTable() {
     },[])
 
    const deleteData=(id)=>{
-        axios.delete(`http://localhost:8080/pats/${id}`).then(res=>{
+        axios.delete(`https://patboarding.herokuapp.com/pats/${id}`).then(res=>{
             getdata();
         }).catch(err=>{
             console.log(err)

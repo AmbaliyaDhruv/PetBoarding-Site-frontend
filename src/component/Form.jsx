@@ -40,7 +40,7 @@ function Form() {
     const hendleSubmit=(e)=>{
         e.preventDefault()
      dispatch(addData(check))
-       axios.post("http://localhost:8080/create",check).then(res=>{
+       axios.post("https://patboarding.herokuapp.com/create",check).then(res=>{
            console.log(res.data)
            alert("Data added successfully")
            dispatch(addData({

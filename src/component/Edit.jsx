@@ -15,13 +15,13 @@ function Edit() {
     const {id}=useParams()
 
     useEffect(()=>{
-        axios.get(`http://localhost:8080/create/${id}`).then(res=>{
+        axios.get(`https://patboarding.herokuapp.com/create/${id}`).then(res=>{
             setdata(res.data)
         }).catch(err=>{ console.log(err)}   )
     },[])
     const hendleSubmit=(e)=>{
         e.preventDefault()
-        axios.patch(`http://localhost:8080/create/${id}`,check).then(res=>{
+        axios.patch(`https://patboarding.herokuapp.com/create/${id}`,check).then(res=>{
             alert("Data updated successfully")
         }).catch(err=>{
             alert("Data not updated")

@@ -14,7 +14,7 @@ function PatDetails() {
     const {id} = useParams()
     const [data,setData] = useState({})
     useEffect(()=>{
-        axios.get(`http://localhost:8080/pats/${id}`).then(res=>{
+        axios.get(`https://patboarding.herokuapp.com/pats/${id}`).then(res=>{
             setData(res.data)
         })
     },[])

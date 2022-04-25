@@ -22,7 +22,7 @@ export default function SelecterforPat({centerId}) {
  
  
  useEffect(()=>{
-     axios.get(`http://localhost:8080/pats?userId=${userId}`).then(res=>{
+     axios.get(`https://patboarding.herokuapp.com/pats?userId=${userId}`).then(res=>{
         setpat(res.data)
          
      }).catch(err=>{
@@ -53,9 +53,9 @@ export default function SelecterforPat({centerId}) {
   const handleSubmit=(event)=>{
     event.preventDefault();
    
-    axios.post("http://localhost:8080/booking",data).then(res=>{
+    axios.post("https://patboarding.herokuapp.com/booking",data).then(res=>{
         alert("Booking Successfully")
-        
+
     }).catch(err=>{
         alert("Booking Failed Try Again")
     })

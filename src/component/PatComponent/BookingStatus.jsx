@@ -8,7 +8,7 @@ function BookingStatus() {
    const [data,setData]=useState([])
    const Id=useSelector(state=>state.adminData.Id)
     useEffect(()=>{
-        axios.get(`http://localhost:8080/booking?userId=${Id}`).then(res=>{
+        axios.get(`https://patboarding.herokuapp.com/booking?userId=${Id}`).then(res=>{
             setData(res.data)
         }).catch(err=>{
             console.log(err)
