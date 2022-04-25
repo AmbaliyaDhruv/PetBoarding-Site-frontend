@@ -6,6 +6,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import PatAdd from './PatAdd';
 import PatTable from './PatTable';
+import BookingStatus from './BookingStatus';
 
 export default function Pats() {
   const [value, setValue] = React.useState('1');
@@ -26,7 +27,7 @@ export default function Pats() {
         </Box>
         <TabPanel value="1"><PatTable/></TabPanel>
         <TabPanel value="2"><PatAdd/></TabPanel>
-        <TabPanel value="3">Booking Status</TabPanel>
+        <TabPanel value="3"><BookingStatus/></TabPanel>
       </TabContext>
     </Box>
   );

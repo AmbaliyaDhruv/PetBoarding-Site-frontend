@@ -36,11 +36,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function PatTable() {
     
     const row = useSelector(state=>state.dataForPat)
-    const {AdminSatatus}=useSelector(state=>state.adminData)
+    const {Id}=useSelector(state=>state.adminData)
 
     const dispatch = useDispatch();
     const getdata=()=>{
-       axios.get("http://localhost:8080/pats").then(res=>{
+       axios.get(`http://localhost:8080/pats?userId=${Id}`).then(res=>{
           
            dispatch(patAdd(res.data))
        }).catch(err=>{
@@ -76,12 +76,12 @@ export default function PatTable() {
             <StyledTableCell align="center">Age</StyledTableCell>
             <StyledTableCell align="center">More</StyledTableCell>
             <StyledTableCell align="center">Delete</StyledTableCell>
-            <StyledTableCell align="center">Edit</StyledTableCell>
+            
            
           </TableRow>
         </TableHead>
         <TableBody>
-          {row.map((e,i)=>{
+          {row.length>0?row.map((e,i)=>{
               return  <StyledTableRow key={e._id} sx={{cursor:"pointer"}}>
               <StyledTableCell align="left">{i+1}</StyledTableCell>
                   <StyledTableCell component="th" scope="row">
@@ -90,12 +90,12 @@ export default function PatTable() {
                   <StyledTableCell align="center">{e.type}</StyledTableCell>
                   <StyledTableCell align="center">{e.weight}</StyledTableCell>
                   <StyledTableCell align="center">{e.age}</StyledTableCell>
-                  <StyledTableCell align="center"><Link to={`/listing/${e._id}`}>More</Link></StyledTableCell>
+                  <StyledTableCell align="center"><Link to={`/listing/pats/${e._id}`}>More</Link></StyledTableCell>
                   <StyledTableCell align="center" onClick={()=>{deleteData(e._id)}}>Delete</StyledTableCell>
-                  <StyledTableCell align="center"><Link to={`/listing/Edit/${e._id}`}>Edit</Link></StyledTableCell>
+                  
                   
                 </StyledTableRow>
-          })}
+          }):<StyledTableRow>No Data</StyledTableRow>}
          
             
         </TableBody>

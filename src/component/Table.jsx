@@ -12,6 +12,7 @@ import { getData } from '../action/getData';
 import { Link } from 'react-router-dom';
 import SelectLabels from './Selecter';
 import axios from 'axios';
+import PaginationForTable from './Pagination';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -37,22 +38,28 @@ export default function Tables() {
     
     const row = useSelector(state=>state.dataForTable)
     const {AdminSatatus}=useSelector(state=>state.adminData)
-
+    const [page,setPage]=useState(1)
+    const [count,setcount]=useState(1)
+    console.log(page)
     const dispatch = useDispatch();
     const getdata=()=>{
-       axios.get("http://localhost:8080/create").then(res=>{
+       axios.get(`http://localhost:8080/create?page=${page}`).then(res=>{
           
            dispatch(getData(res.data))
+           
        }).catch(err=>{
            console.log(err)
        } )
+       axios.get("http://localhost:8080/create/count").then(res=>{
+            setcount(Math.ceil((res.data.count)/4))
+       })
     }
 
     useEffect(()=>{
         getdata();
-      
-    },[])
-
+        
+    },[page])
+ console.log(count)
    const deleteData=(id)=>{
         axios.delete(`http://localhost:8080/create/${id}`).then(res=>{
             getdata();
@@ -106,6 +113,7 @@ export default function Tables() {
             
         </TableBody>
       </Table>
+      <PaginationForTable page={setPage} count={count}/>
     </TableContainer>
   );
 }

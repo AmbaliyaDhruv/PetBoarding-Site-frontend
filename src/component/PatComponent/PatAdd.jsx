@@ -15,6 +15,8 @@ import {patData} from "../../action/patData"
 function PatAdd() {
 
 const check = useSelector(state=>state.createPatData)
+const Id=useSelector(state=>state.adminData.Id)
+
     const dispatch = useDispatch()
 
     // const [data,setdata]=useState({
@@ -34,6 +36,7 @@ const check = useSelector(state=>state.createPatData)
         // })
         dispatch(patData({
             ...check,
+            userId:Id,
             [id]:value
         }))
 

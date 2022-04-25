@@ -15,7 +15,7 @@ import PetsIcon from '@mui/icons-material/Pets';
 import { Link } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import {adminLogin} from "../action/checkAdmin";
-const pages = ["Home", "Create", "About"];
+const pages = ["Home", "Create"];
 const settings = ['Login', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
@@ -38,13 +38,15 @@ const Navbar = () => {
   };
  
 
-  const {name}=useSelector(state=>state.adminData)
+  const {name,AdminSatatus}=useSelector(state=>state.adminData)
+  
   const dispatch = useDispatch()
   const handlelogout=()=>{
     let dub={
       email:"nan"
     }
      dispatch(adminLogin(dub))
+     window.location.href="/login"
   }
   return (
     <AppBar position="static">
@@ -144,9 +146,13 @@ const Navbar = () => {
                 <MenuItem onClick={handleCloseUserMenu}>
                 <Typography onClick={handlelogout}>Logout</Typography>
                 </MenuItem>
-                 <MenuItem onClick={handleCloseUserMenu}>
+                {!AdminSatatus && name!==""?<MenuItem onClick={handleCloseUserMenu}>
                  <Link style={{textDecoration:"none",color:"black"}} to={"/mypats"}>Profile</Link>
-                </MenuItem>
+                </MenuItem>:null}
+                {AdminSatatus?<MenuItem onClick={handleCloseUserMenu}>
+                 <Link style={{textDecoration:"none",color:"black"}} to={"/admin"}>Request</Link>
+                </MenuItem>:null}
+                 
             </Menu>
           </Box>
         </Toolbar>
